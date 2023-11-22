@@ -1,13 +1,13 @@
 import io.papermc.mache.ConfigureVersionProject
 import io.papermc.mache.MacheExtension
 import io.papermc.mache.constants.DECOMP_JAR
-import io.papermc.mache.constants.DOWNLOAD_SERVER_JAR
+import io.papermc.mache.constants.DOWNLOAD_INPUT_JAR
 import io.papermc.mache.constants.FAILED_PATCH_JAR
 import io.papermc.mache.constants.PATCHED_JAR
 import io.papermc.mache.constants.REMAPPED_JAR
 import io.papermc.mache.constants.REPO_URL
-import io.papermc.mache.constants.SERVER_JAR
-import io.papermc.mache.constants.SERVER_MAPPINGS
+import io.papermc.mache.constants.INPUT_JAR
+import io.papermc.mache.constants.INPUT_MAPPINGS
 import io.papermc.mache.tasks.ApplyPatches
 import io.papermc.mache.tasks.ApplyPatchesFuzzy
 import io.papermc.mache.tasks.DecompileJar
@@ -17,6 +17,7 @@ import io.papermc.mache.tasks.RebuildPatches
 import io.papermc.mache.tasks.RemapJar
 import io.papermc.mache.tasks.SetupSources
 import io.papermc.mache.util.ArtifactVersionProvider
+import io.papermc.mache.util.MinecraftSide
 import io.papermc.mache.util.asGradleMavenArtifacts
 import io.papermc.mache.util.isNativeDiffAvailable
 import org.gradle.accessors.dm.LibrariesForLibs
@@ -44,13 +45,19 @@ configurations.implementation {
 }
 
 val extractServerJar by tasks.registering(ExtractServerJar::class) {
-    downloadedJar.set(layout.dotGradleDirectory.file(DOWNLOAD_SERVER_JAR))
-    serverJar.set(layout.dotGradleDirectory.file(SERVER_JAR))
+    downloadedJar.set(layout.dotGradleDirectory.file(DOWNLOAD_INPUT_JAR))
+    inputJar.set(layout.dotGradleDirectory.file(INPUT_JAR))
 }
 
 val remapJar by tasks.registering(RemapJar::class) {
-    serverJar.set(extractServerJar.flatMap { it.serverJar })
-    serverMappings.set(layout.dotGradleDirectory.file(SERVER_MAPPINGS))
+    // don't need to extract the client jar
+    if (mache.minecraftJarType.getOrElse(MinecraftSide.SERVER) == MinecraftSide.SERVER) {
+        inputJar.set(extractServerJar.flatMap { it.inputJar })
+    } else {
+        inputJar.set(layout.dotGradleDirectory.file(DOWNLOAD_INPUT_JAR))
+    }
+
+    inputMappings.set(layout.dotGradleDirectory.file(INPUT_MAPPINGS))
 
     codebookClasspath.from(codebook)
     minecraftClasspath.from(minecraft)
@@ -124,8 +131,15 @@ val applyPatchesFuzzy by tasks.registering(ApplyPatchesFuzzy::class) {
 
 val copyResources by tasks.registering(Sync::class) {
     into(layout.projectDirectory.dir("src/main/resources"))
-    from(zipTree(extractServerJar.flatMap { it.serverJar })) {
-        exclude("**/*.class", "META-INF/**")
+
+    if (mache.minecraftJarType.getOrElse(MinecraftSide.SERVER) == MinecraftSide.SERVER) {
+        from(zipTree(extractServerJar.flatMap { it.inputJar })) {
+            exclude("**/*.class", "META-INF/**")
+        }
+    } else {
+        from(zipTree(layout.dotGradleDirectory.file(DOWNLOAD_INPUT_JAR))) {
+            exclude("**/*.class", "META-INF/**")
+        }
     }
     includeEmptyDirs = false
 }

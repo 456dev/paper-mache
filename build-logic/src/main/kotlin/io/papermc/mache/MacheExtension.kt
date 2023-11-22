@@ -2,6 +2,7 @@ package io.papermc.mache
 
 import io.papermc.mache.constants.DefaultRepos
 import io.papermc.mache.util.MacheRepo
+import io.papermc.mache.util.MinecraftSide
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ListProperty
@@ -15,6 +16,8 @@ open class MacheExtension(objects: ObjectFactory) {
      * The version of Minecraft which will serve as the base.
      */
     val minecraftVersion: Property<String> = objects.property()
+
+    val minecraftJarType: Property<MinecraftSide> = objects.property()
 
     /**
      * Base arguments passed to the decompiler.
