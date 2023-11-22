@@ -73,7 +73,7 @@ abstract class SetupSources : DefaultTask() {
         }
 
         files.sync {
-            from(files.zipTree(decompJar))
+            from(files.zipTree(decompJar).matching{ include("**/*.java") })
             into(sourceDir)
             includeEmptyDirs = false
         }
@@ -87,7 +87,7 @@ abstract class SetupSources : DefaultTask() {
         git.tag().setName("decompiled").setTagger(macheIdent).setSigned(false).call()
 
         files.sync {
-            from(files.zipTree(patchedJar))
+            from(files.zipTree(patchedJar).matching{ include("**/*.java") })
             into(sourceDir)
             includeEmptyDirs = false
         }
