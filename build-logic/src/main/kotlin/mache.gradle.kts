@@ -110,6 +110,7 @@ val setupSources by tasks.registering(SetupSources::class) {
     failedPatchJar.set(layout.buildDirectory.file(FAILED_PATCH_JAR))
 
     sourceDir.set(layout.projectDirectory.dir("src/main/java"))
+    dependsOn(copyResources)
 }
 
 applyPatches.configure {
