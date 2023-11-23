@@ -1,0 +1,29 @@
+--- a/net/minecraft/client/main/Main.java
++++ b/net/minecraft/client/main/Main.java
+@@ -194,7 +194,7 @@
+         };
+         thread.setUncaughtExceptionHandler(new DefaultUncaughtExceptionHandler(LOGGER));
+         Runtime.getRuntime().addShutdownHook(thread);
+-        final Minecraft minecraft = null;
++        Minecraft minecraft = null;
+ 
+         try {
+             Thread.currentThread().setName("Render thread");
+@@ -215,7 +215,7 @@
+             return;
+         }
+ 
+-        Minecraft minecraft1 = minecraft;
++        final Minecraft minecraft1 = minecraft;
+         Thread thread1;
+         if (minecraft.renderOnThread()) {
+             thread1 = new Thread("Game thread") {
+@@ -223,7 +223,7 @@
+                 public void run() {
+                     try {
+                         RenderSystem.initGameThread(true);
+-                        minecraft.run();
++                        minecraft1.run();
+                     } catch (Throwable var2) {
+                         Main.LOGGER.error("Exception in client thread", var2);
+                     }
