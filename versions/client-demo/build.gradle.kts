@@ -1,9 +1,12 @@
+import io.papermc.mache.util.MinecraftSide
+
 plugins {
     id("mache")
 }
 
 mache {
-    minecraftVersion = "23w46a"
+    minecraftVersion = "1.20.2" // demo, see clientver/* and clientsnap/* branches
+    minecraftJarType = MinecraftSide.CLIENT
     repositories.register("sonatype snapshots") {
         url.set("https://s01.oss.sonatype.org/content/repositories/snapshots/")
         includeGroups.set(listOf("org.vineflower"))
