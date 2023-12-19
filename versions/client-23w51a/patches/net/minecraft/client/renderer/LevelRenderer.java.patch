@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/renderer/LevelRenderer.java
 +++ b/net/minecraft/client/renderer/LevelRenderer.java
-@@ -3085,7 +3085,7 @@
+@@ -3088,7 +3088,7 @@
                  int i3 = data >> 6;
                  if (i3 > 0) {
                      if (randomSource.nextFloat() < 0.3F + (float)i3 * 0.1F) {
