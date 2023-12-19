@@ -5,7 +5,7 @@ plugins {
 }
 
 mache {
-    minecraftVersion = "1.20.4"
+    minecraftVersion = "23w51a"
     minecraftJarType = MinecraftSide.CLIENT
     repositories.register("sonatype snapshots") {
         url.set("https://s01.oss.sonatype.org/content/repositories/snapshots/")
