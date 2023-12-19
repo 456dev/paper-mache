@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/multiplayer/ClientCommonPacketListenerImpl.java
 +++ b/net/minecraft/client/multiplayer/ClientCommonPacketListenerImpl.java
-@@ -51,6 +51,7 @@
+@@ -53,6 +53,7 @@
  import net.minecraft.resources.ResourceKey;
  import net.minecraft.tags.TagKey;
  import net.minecraft.tags.TagNetworkSerialization;
@@ -8,7 +8,7 @@
  import org.slf4j.Logger;
  
  public abstract class ClientCommonPacketListenerImpl implements ClientCommonPacketListener {
-@@ -198,7 +199,7 @@
+@@ -160,7 +161,7 @@
          if (!networkPayload.isEmpty()) {
              Registry<T> registry = this.registryAccess().registry(resourceKey).orElseThrow(() -> new IllegalStateException("Unknown registry " + resourceKey));
              Map<TagKey<T>, List<Holder<T>>> map = new HashMap<>();
