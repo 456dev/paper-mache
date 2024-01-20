@@ -1,8 +1,6 @@
 --- a/net/minecraft/network/protocol/configuration/ClientboundUpdateEnabledFeaturesPacket.java
 +++ b/net/minecraft/network/protocol/configuration/ClientboundUpdateEnabledFeaturesPacket.java
-@@ -12,9 +12,9 @@
-     public static final StreamCodec<FriendlyByteBuf, ClientboundUpdateEnabledFeaturesPacket> STREAM_CODEC = Packet.codec(
-         ClientboundUpdateEnabledFeaturesPacket::write, ClientboundUpdateEnabledFeaturesPacket::new
+@@ -14,7 +14,7 @@
      );
  
      private ClientboundUpdateEnabledFeaturesPacket(FriendlyByteBuf buffer) {
