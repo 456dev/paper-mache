@@ -1,6 +1,6 @@
 --- a/net/minecraft/client/resources/model/ModelBakery.java
 +++ b/net/minecraft/client/resources/model/ModelBakery.java
-@@ -188,10 +188,10 @@
+@@ -187,10 +187,10 @@
              Iterator<String> iterator = EQUAL_SPLITTER.split(string).iterator();
              if (iterator.hasNext()) {
                  String string1 = iterator.next();
