@@ -1,6 +1,6 @@
 --- a/net/minecraft/network/codec/StreamCodec.java
 +++ b/net/minecraft/network/codec/StreamCodec.java
-@@ -171,7 +171,7 @@
+@@ -239,7 +239,7 @@
      }
  
      default <S extends B> StreamCodec<S, V> cast() {

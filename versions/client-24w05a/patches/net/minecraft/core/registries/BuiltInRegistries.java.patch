@@ -1,6 +1,6 @@
 --- a/net/minecraft/core/registries/BuiltInRegistries.java
 +++ b/net/minecraft/core/registries/BuiltInRegistries.java
-@@ -301,7 +301,7 @@
+@@ -304,7 +304,7 @@
          Bootstrap.checkBootstrapCalled(() -> "registry " + key);
          ResourceLocation resourceLocation = key.location();
          LOADERS.put(resourceLocation, () -> bootstrap.run(registry));

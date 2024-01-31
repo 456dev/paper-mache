@@ -1,6 +1,6 @@
 --- a/com/mojang/blaze3d/systems/RenderSystem.java
 +++ b/com/mojang/blaze3d/systems/RenderSystem.java
-@@ -834,7 +834,7 @@
+@@ -832,7 +832,7 @@
          Matrix4f matrix4f = new Matrix4f(projectionMatrix);
          if (!isOnRenderThread()) {
              recordRenderCall(() -> {
@@ -9,7 +9,7 @@
                  RenderSystem.vertexSorting = vertexSorting;
              });
          } else {
-@@ -855,7 +855,7 @@
+@@ -844,7 +844,7 @@
      public static void setTextureMatrix(Matrix4f textureMatrix) {
          Matrix4f matrix4f = new Matrix4f(textureMatrix);
          if (!isOnRenderThread()) {
