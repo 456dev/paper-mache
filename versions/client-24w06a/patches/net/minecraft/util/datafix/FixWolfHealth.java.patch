@@ -1,0 +1,11 @@
+--- a/net/minecraft/util/datafix/FixWolfHealth.java
++++ b/net/minecraft/util/datafix/FixWolfHealth.java
+@@ -43,7 +43,7 @@
+                         )
+                 );
+                 if (mutableBoolean.isTrue()) {
+-                    var2 = var2.update("Health", dynamic1 -> dynamic1.createFloat(dynamic1.asFloat(0.0F) * 2.0F));
++                    var2 = var2.update("Health", dynamic1 -> ((Dynamic)dynamic1).createFloat(((Dynamic)dynamic1).asFloat(0.0F) * 2.0F));
+                 }
+     
+                 return var2;
